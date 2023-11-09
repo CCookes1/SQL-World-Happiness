@@ -1,0 +1,19 @@
+SELECT Country_or_region,
+FROM (
+  SELECT '2015' AS year, * FROM portfolio-project-403416.WorldHappinessRankings.2015
+  UNION ALL
+  SELECT '2016' AS year, * FROM portfolio-project-403416.WorldHappinessRankings.2016
+  UNION ALL
+  SELECT '2017' AS year, * FROM portfolio-project-403416.WorldHappinessRankings.2017
+  UNION ALL
+  SELECT '2018' AS year, * FROM portfolio-project-403416.WorldHappinessRankings.2018
+  UNION ALL
+  SELECT '2019' AS year, * FROM portfolio-project-403416.WorldHappinessRankings.2019
+) WH_Combined
+WHERE 
+  Overall_rank <11
+  AND
+  GDP_per_capita > 1.0
+GROUP BY 
+  Country_or_region
+HAVING COUNT(DISTINCT year) = 5;
